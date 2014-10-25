@@ -8,8 +8,8 @@ import lxml.html
 html = scraperwiki.scrape("http://www.archiv-buergerbewegung.de/index.php/demonstrationen")
 #
 # # Find something on the page using css selectors
- root = lxml.html.fromstring(html)
- root.cssselect("map")
+root = lxml.html.fromstring(html)
+root.cssselect("map")
 #
 # # Write out to the sqlite database using scraperwiki library
 scraperwiki.sqlite.save(unique_keys=['title'], data={"bezirk": "Schwerin"})
