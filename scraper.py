@@ -12,7 +12,7 @@ html = scraperwiki.scrape("http://www.archiv-buergerbewegung.de/index.php/demons
  root.cssselect("map")
 #
 # # Write out to the sqlite database using scraperwiki library
-scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
+scraperwiki.sqlite.save(unique_keys=['title'], data={"bezirk": "Schwerin"})
 #
 # # An arbitrary query against the database
 scraperwiki.sql.select("* from data")
