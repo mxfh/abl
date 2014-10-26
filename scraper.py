@@ -21,6 +21,7 @@ url = "http://www.archiv-buergerbewegung.de/index.php/demonstrationen" # loading
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
 
+i = 0
 bezirke = []
 orte = []
 events = []
@@ -61,7 +62,8 @@ for o in orte:
         date = ttuple.date()
         print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo)
         events.append({
-            "id" : bezirk + ort + datum,
+            "id" : i,
+            "uniq" : bezirk + ort + datum,
             "bezirk": bezirk,
             "ort": ort,
             "datum": datum,
@@ -80,4 +82,5 @@ for o in orte:
             "demo": demo,
             "kirche": kirche
         })
+        i++;
         scraperwiki.sqlite.save(unique_keys=["id"], data=evententries)
