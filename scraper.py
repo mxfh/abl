@@ -13,18 +13,19 @@ bezirke = []
 orte = []
 events = []
 for bezirkarea in soup.find_all("area"): # for each 
-    url = bezirkarea['href']
+    url = domain + bezirkarea['href']
     title = bezirkarea['title']
     bezirk = title.replace("Bezirk ", "")
     bezirke.append({"name": bezirk, "url": url}) # put the values extracted into a list
-    html = scraperwiki.scrape(domain + url) 
+    html = scraperwiki.scrape(url) 
     soup = BeautifulSoup(html).find(id="overlay-content")
     for ortli in soup.find_all("li"): 
-        url= ortli.a['href']
+        url= domain + ortli.a['href']
         title = ortli.a.contents[0]
         ort = re.sub(' \(.*$', '', title)
         orte.append({"name": ort, "url": url}) # put the values extracted into a list
-        html = scraperwiki.scrape(domain + url) 
+        print(url)
+        html = scraperwiki.scrape(url) 
         soup = BeautifulSoup(html).find(id="overlay-content")
         for evententries in soup.find_all("div", class_="entry"): 
             datum = re.sub('^[ ]*', '', evententries.find(b, text="Datum:").next_sibling) ## remove leading spaces
