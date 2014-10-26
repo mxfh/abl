@@ -54,7 +54,7 @@ for bezirkarea in soup.find_all("area"): # for each
             date = ttuple.date()
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo)
             events.append({
-                "key" : datum + ort,
+                "id" : bezirk + ort + (ttuple - tageins).days,
                 "bezirk": bezirk,
                 "ort": ort,
                 "datum": datum,
@@ -74,4 +74,4 @@ for bezirkarea in soup.find_all("area"): # for each
                 "kirche": kirche
                 })
 
-    scraperwiki.sqlite.save(unique_keys=["key"], data=evententries)
+    scraperwiki.sqlite.save(unique_keys=["id"], data=evententries)
