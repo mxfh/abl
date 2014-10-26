@@ -106,7 +106,7 @@ for o in orte:
         olist = [
             obj["id"],
             obj["bezirk"],
-            obj["ort"] + " (" + obj["einwohner"] + ")",
+            obj["ort"] + " (" + str(obj["einwohner"]) + ")",
             obj["datum"],
             obj["teilnehmermax"],
             obj["teilnehmerrelort"]
