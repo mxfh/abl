@@ -55,7 +55,7 @@ def parsefield(html, string):
     prefixrepattern = '^[ ]*'  ## select leading spaces
     fieldtitlecontainerelement = 'b'
     fielddata = re.sub(prefixrepattern, '', html.find(fieldtitlecontainerelement, text=searchstring).next_sibling)
-    return fielddata
+    return fielddata.encode('utf-8')
 
 for o in orte:
     ort = o["name"]
