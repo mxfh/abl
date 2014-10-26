@@ -83,4 +83,4 @@ for o in orte:
         print obj
         events.append(obj)
         i = i + 1;
-        scraperwiki.sqlite.save(unique_keys=["id"], data=evententries)
+        scraperwiki.sqlite.save(unique_keys=["id"], data=events)
