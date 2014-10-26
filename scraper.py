@@ -50,7 +50,7 @@ for bezirkarea in soup.find_all("area"): # for each
             einwohner = int(re.sub('^[ ]*', '', evententries.find('b', text="Einwohner (1989):").next_sibling))
             kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
             demo = (evententries.find('b', text="Demo:").next_sibling == " x"),
-            ts = datetime.struct_time(datetime.datetime.strptime(datum, "%d.%m.%Y")),
+            ts = datetime.datetime(datetime.datetime.strptime(datum, "%d.%m.%Y")),
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo, url)
             events.append({
                 "key" : datum + ort,
