@@ -17,8 +17,9 @@ def iriToUri(iri):
 
 scraperwiki.sqlite.execute("drop table if exists swdata")
 
-if 'MORPH_DOMAIN' in os.environ:
-    domain = os.environ['MORPH_DOMAIN']
+##if 'MORPH_DOMAIN' in os.environ:
+##    domain = os.environ['MORPH_DOMAIN']
+domain = "http://www.archiv-buergerbewegung.de/"
 url = domain + "index.php/demonstrationen"
 print (domain, url)
 html = scraperwiki.scrape(url) # download the html content of the page
