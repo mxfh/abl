@@ -16,8 +16,8 @@ def iriToUri(iri):
 
 scraperwiki.sqlite.execute("drop table if exists swdata")
 
-domain = "http://www.archiv-buergerbewegung.de"
-url = "http://www.archiv-buergerbewegung.de/index.php/demonstrationen" # loading your url from the csv/database
+domain = MORPH_DOMAIN
+url = doamin + "index.php/demonstrationen"
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
 
@@ -30,7 +30,7 @@ for bezirkarea in soup.find_all("area"): # for each
     url = iriToUri(domain + bezirkarea['href'])
     title = bezirkarea['title']
     bezirk = title.replace("Bezirk ", "")
-    bezirke.append({"name": bezirk, "url": url}) # put the values extracted into a list
+    bezirke.append({"name": bezirk, "url": url})
 
 for b in bezirke:
     html = scraperwiki.scrape(b['url']) 
