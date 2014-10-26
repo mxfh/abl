@@ -16,8 +16,8 @@ def iriToUri(iri):
 
 scraperwiki.sqlite.execute("drop table if exists swdata")
 
-domain = "http://www.archiv-buergerbewegung.de/"
-url = domain + "index.php/demonstrationen"
+domain = "http://www.archiv-buergerbewegung.de"
+url = domain + "/index.php/demonstrationen"
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
 
