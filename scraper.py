@@ -31,7 +31,6 @@ for bezirkarea in soup.find_all("area"): # for each
     title = bezirkarea['title']
     bezirk = title.replace("Bezirk ", "")
     bezirke.append({"name": bezirk, "url": url}) # put the values extracted into a list
-print(bezirke) 
 
 for b in bezirke:
     html = scraperwiki.scrape(b['url']) 
@@ -59,8 +58,7 @@ for o in orte:
         demo = (evententries.find('b', text="Demo:").next_sibling == " x")
         ttuple = datetime.datetime.strptime(datum, "%d.%m.%Y")
         date = ttuple.date()
-        print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo)
-        events.append({
+        obj = {
             "id" : i,
             "uniq" : bezirk + ort + datum,
             "bezirk": bezirk,
@@ -79,7 +77,10 @@ for o in orte:
             "teilnehmerminka": teilnehmerminka,
             "einwohner": einwohner,
             "demo": demo,
-            "kirche": kirche
-        })
+            "kirche": kirche,
+            "url": o['url']
+        }
+        print obj
+        events.append(obj)
         i = i + 1;
         scraperwiki.sqlite.save(unique_keys=["id"], data=evententries)
