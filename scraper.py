@@ -1,7 +1,6 @@
 import scraperwiki
 import re
 import urlparse
-import date
 import datetime
 import time
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
@@ -26,7 +25,7 @@ soup = BeautifulSoup(html) # load the html into beautifulsoup
 bezirke = []
 orte = []
 events = []
-tageins = date(1989, 8, 7)  ## beginn der ersten woche 7.8.89 relativ zu 13.8.89
+tageins = datetime.date(1989, 8, 7)  ## beginn der ersten woche 7.8.89 relativ zu 13.8.89
 for bezirkarea in soup.find_all("area"): # for each 
     url = iriToUri(domain + bezirkarea['href'])
     title = bezirkarea['title']
