@@ -51,7 +51,7 @@ for bezirkarea in soup.find_all("area"): # for each
             kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
             demo = (evententries.find('b', text="Demo:").next_sibling == " x"),
             ttuple = datetime.datetime.strptime(datum, "%d.%m.%Y")
-            date = ttuple.datetime()
+            date = ttuple.date()
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo, url)
             print(date,ttuple)
             events.append({
@@ -63,9 +63,9 @@ for bezirkarea in soup.find_all("area"): # for each
                 "monat":  ttuple.timetuple().tm_mon,
                 "tag":  ttuple.timetuple().tm_mday,
                 "yday": ttuple.timetuple().tm_yday,
-                "tageseit": (date - tageins).days,
-                "wochenseit": (date - tageins).weeks,
-                "monateseit": (date - tageins).months,
+                "tageseit": (ttuple - tageins).days,
+                "wochenseit": (ttuple - tageins).weeks,
+                "monateseit": (ttuple - tageins).months,
                 "isoweekday": date.isoweekday(),
                 "isoweek": date.isocalendar()[1],
                 "teilnehmermax": teilnehmermax,
