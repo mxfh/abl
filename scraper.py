@@ -40,8 +40,8 @@ for bezirkarea in soup.find_all("area"): # for each
         soup = BeautifulSoup(html).find(id="overlay-content")
         for evententries in soup.find_all("div", class_="entry"): 
             datum = re.sub('^[ ]*', '', evententries.find('b', text="Datum:").next_sibling) ## remove leading spaces
-            teilnehmermax =  re.sub('^[ ]*', '', evententries.find('b', text="Teilnehmer Max:").next_sibling)
-            teilnehmermin =  re.sub('^[ ]*', '', evententries.find('b', text="Teilnehmer Min:").next_sibling)
+            teilnehmermax =  re.sub('^[ ]*', '', evententries.find('b', text="Teilnehmer Max:").next_sibling).replace("keine Angaben", "0")
+            teilnehmermin =  re.sub('^[ ]*', '', evententries.find('b', text="Teilnehmer Min:").next_sibling).replace("keine Angaben", "0")
             einwohner = re.sub('^[ ]*', '', evententries.find('b', text="Einwohner (1989):").next_sibling)
             kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
             demo = (evententries.find('b', text="Demo:").next_sibling == " x")
