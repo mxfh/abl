@@ -2,7 +2,6 @@ import scraperwiki
 import re
 import urlparse
 import datetime
-import os
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
 
 def urlEncodeNonAscii(b):
@@ -17,8 +16,6 @@ def iriToUri(iri):
 
 scraperwiki.sqlite.execute("drop table if exists swdata")
 
-##if 'MORPH_DOMAIN' in os.environ:
-##    domain = os.environ['MORPH_DOMAIN']
 domain = "http://www.archiv-buergerbewegung.de/"
 url = domain + "index.php/demonstrationen"
 print (url)
