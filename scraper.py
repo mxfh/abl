@@ -49,9 +49,9 @@ for b in bezirke:
         ort = re.sub(' \(.*$', '', title)
         orte.append({"name": ort, "bezirk": bezirk, "url": url}) # put the values extracted into a list
 
-def parsefield(str(string), html):
+def parsefield(string, html):
     suffix = ":"
-    searchstring = string + suffix
+    searchstring = str(string) + suffix
     print (searchstring)
     prefixrepattern = '^[ ]*'  ## select leading spaces
     fieldtitlecontainerelement = 'b'
