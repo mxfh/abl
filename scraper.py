@@ -104,7 +104,7 @@ for o in orte:
             "bundesland": parsefield(ee, "Bundesland")
         }
         olist = [obj["id"],obj["bezirk"],obj["ort"],obj["datum"],obj["teilnehmermax"],obj["teilnehmerrelort"]]
-        print (*olist, sep='\t')
+        print('\t'.join(map(str,olist))) ## debug log tab seperated
         events.append(obj)
         i = i + 1;
     scraperwiki.sqlite.save(unique_keys=["id"], data=events)
