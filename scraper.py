@@ -54,4 +54,4 @@ for bezirkarea in soup.find_all("area"): # for each
                 "kirche" : kirche
                 })
 
-    scraperwiki.sqlite.save(unique_keys=["ort, datum"], data=orte)
+    scraperwiki.sqlite.save(unique_keys=["ort", "datum"], data=evententries)
