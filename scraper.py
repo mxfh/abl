@@ -1,7 +1,6 @@
 import scraperwiki
 import re
 import urlparse
-import time
 import datetime
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
 
@@ -52,21 +51,21 @@ for bezirkarea in soup.find_all("area"): # for each
             kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
             demo = (evententries.find('b', text="Demo:").next_sibling == " x"),
             ttuple = datetime.datetime.strptime(datum, "%d.%m.%Y")
-            ts = datetime.datetime.fromtimestamp(time.mktime(ttuple)),
+            date = ttuple.date(),
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo, url)
             events.append({
                 "key" : datum + ort,
                 "bezirk": bezirk,
                 "ort": ort,
                 "datum": datum,
-                "jahr":  ts.year,
-                "monat":  ts.month,
-                "tag":  ts.day,
-                "tageseit": (ts - tageins).days,
-                "wochenseit": (ts - tageins).weeks,
-                "yday": ts.yday,
-                "isoweekday": ts.isoweekday(),
-                "isoweek": ts.isocalendar()[1],
+                "jahr":  date.year,
+                "monat":  date.month,
+                "tag":  date.day,
+                "tageseit": (date - tageins).days,
+                "wochenseit": (date - tageins).weeks,
+                "yday": date.yday,
+                "isoweekday": date.isoweekday(),
+                "isoweek": date.isocalendar()[1],
                 "teilnehmermax": teilnehmermax,
                 "teilnehmermin": teilnehmermin,
                 "teilnehmermaxka": teilnehmermaxka,
