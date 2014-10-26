@@ -17,7 +17,7 @@ def iriToUri(iri):
 
 scraperwiki.sqlite.execute("drop table if exists swdata")
 
-if 'MORPH_DOMAIN' in os.environ and 'MORPH_START' in os.environ:
+if 'MORPH_DOMAIN' in os.environ and 'MORPH_STARTPATH' in os.environ:
     domain = os.environ['MORPH_DOMAIN'] 
     startpath = os.environ['MORPH_STARTPATH']
 else:
