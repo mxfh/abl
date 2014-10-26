@@ -16,9 +16,9 @@ for bezirkarea in soup.find_all("area"): # for each
     title = bezirkarea['title']
     name = title.replace("Bezirk ", "")
     bezirke.append({"name": name, "url": url}) # put the values extracted into a list
-    html = scraperwiki.scrape(domain + url) 
-    soup = BeautifulSoup(html)
-    for ortli in soup.find_all("li"): 
+    htmlb = scraperwiki.scrape(domain + url) 
+    soupb = BeautifulSoup(htmlb)
+    for ortli in soupb.find_all("li"): 
         url = ortli.a['href']
         title = ortli.a.contents[0]
         name = re.sub('\(.*$', '', title)
