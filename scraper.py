@@ -103,7 +103,7 @@ for o in orte:
             "besonderheiten": parsefield(ee, "Besonderheiten"),
             "bundesland": parsefield(ee, "Bundesland")
         }
-        print ([obj["id"],obj["bezirk"],obj["ort"],obj["datum"],obj["teilnehmermax"],obj["teilnehmerrelort"]], sep='\t')
+        print (*[obj["id"],obj["bezirk"],obj["ort"],obj["datum"],obj["teilnehmermax"],obj["teilnehmerrelort"]], sep='\t')
         events.append(obj)
         i = i + 1;
     scraperwiki.sqlite.save(unique_keys=["id"], data=events)
