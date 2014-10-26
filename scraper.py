@@ -52,6 +52,7 @@ for b in bezirke:
 def parsefield(string, html):
     suffix = u':'
     searchstring = string + suffix
+    print (searchstring,suffic,string)
     prefixrepattern = '^[ ]*'  ## select leading spaces
     fieldtitlecontainerelement = 'b'
     fielddata = re.sub(prefixrepattern, '', html.find(fieldtitlecontainerelement, text=searchstring).next_sibling)
@@ -63,15 +64,15 @@ for o in orte:
     url = o['url']
     html = scraperwiki.scrape(url) 
     soup = BeautifulSoup(html).find(id="overlay-content")
-    for evententries in soup.find_all("div", class_="entry"): 
-        datum = parsefield(evententries, "Datum")
-        teilnehmermax = parsefield(evententries, "Teilnehmer Max")
+    for ee in soup.find_all("div", class_="entry"): ## ee: event entry
+        datum = parsefield(ee, "Datum")
+        teilnehmermax = parsefield(ee, "Teilnehmer Max")
         teilnehmermaxka = (teilnehmermax == "keine Angaben")
         teilnehmermax =  0 if teilnehmermaxka else int(teilnehmermax)
-        teilnehmermin = parsefield(evententries, "Teilnehmer Min")
+        teilnehmermin = parsefield(ee, "Teilnehmer Min")
         teilnehmerminka = (teilnehmermin == "keine Angaben")
         teilnehmermin =  0 if teilnehmerminka else int(teilnehmermin)
-        einwohner = int(parsefield(evententries, "Einwohner (1989)"))
+        einwohner = int(parsefield(ee, "Einwohner (1989)"))
         ttuple = datetime.datetime.strptime(datum, "%d.%m.%Y")
         date = ttuple.date()
         obj = {
@@ -94,14 +95,14 @@ for o in orte:
             "teilnehmerminka": teilnehmerminka,
             "einwohner": einwohner,
             "teilnehmerrelort":  0 if teilnehmermaxka else teilnehmermax/einwohner,
-            "demo": (parsefield(evententries, "Demo") == " x"),
-            "kirche": (parsefield(evententries, "Kirche") == " x"),  ## boolean
+            "demo": (parsefield(evententry, "Demo") == " x"),
+            "kirche": (parsefield(evententry, "Kirche") == " x"),  ## boolean
             "url": url,       
-            "beschreibung": parsefield(evententries, "Beschreibung"),
-            "ausgerufen": parsefield(evententries, "Ausgerufen"),
-            "thema": parsefield(evententries, "Thema"),
-            "besonderheiten": parsefield(evententries, "Besonderheiten"),
-            "bundesland": parsefield(evententries, "Bundesland")
+            "beschreibung": parsefield(ee, "Beschreibung"),
+            "ausgerufen": parsefield(ee, "Ausgerufen"),
+            "thema": parsefield(ee, "Thema"),
+            "besonderheiten": parsefield(ee, "Besonderheiten"),
+            "bundesland": parsefield(ee, "Bundesland")
         }
         print (obj["id"],obj["uniq"],obj["teilnehmermax"],obj["teilnehmerrelort"])
         events.append(obj)
