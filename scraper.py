@@ -2,6 +2,7 @@ import scraperwiki
 import re
 import urlparse
 import datetime
+import os
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
 
 def urlEncodeNonAscii(b):
@@ -16,8 +17,10 @@ def iriToUri(iri):
 
 scraperwiki.sqlite.execute("drop table if exists swdata")
 
-domain = "http://www.archiv-buergerbewegung.de"
-url = domain + "/index.php/demonstrationen"
+if 'MORPH_DOMAIN' in os.environ and 'MORPH_START' in os.environ:
+domain = os.environ['MORPH_DOMAIN'] 
+startpath = os.environ['MORPH_STARTPATH']
+url = domain + startpath
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
 
