@@ -47,6 +47,14 @@ for b in bezirke:
         ort = re.sub(' \(.*$', '', title)
         orte.append({"name": ort, "bezirk": bezirk, "url": url}) # put the values extracted into a list
 
+def parsefield(string, html):
+    suffix = ':'
+    searchstring = string + suffix
+    prefixrepattern = '^[ ]*'  ## select leading spaces
+    fieldtitlecontainerelement = 'b'
+    fielddata = re.sub(prefixrepattern, '', html.find(fieldtitlecontainerelement, text=searchstring).next_sibling)
+    return fielddata
+
 for o in orte:
     ort = o["name"]
     bezirk = o["bezirk"]
@@ -54,16 +62,14 @@ for o in orte:
     html = scraperwiki.scrape(url) 
     soup = BeautifulSoup(html).find(id="overlay-content")
     for evententries in soup.find_all("div", class_="entry"): 
-        datum = re.sub('^[ ]*', '', evententries.find('b', text="Datum:").next_sibling) ## remove leading spaces
-        teilnehmermax = re.sub('^[ ]*', '', evententries.find('b', text="Teilnehmer Max:").next_sibling)
+        datum = parsefield(evententries, "Datum")
+        teilnehmermax = parsefield(evententries, "Teilnehmer Max")
         teilnehmermaxka = (teilnehmermax == "keine Angaben")
         teilnehmermax =  0 if teilnehmermaxka else int(teilnehmermax)
-        teilnehmermin = re.sub('^[ ]*', '', evententries.find('b', text="Teilnehmer Min:").next_sibling)
+        teilnehmermin = parsefield(evententries, "Teilnehmer Min")
         teilnehmerminka = (teilnehmermin == "keine Angaben")
         teilnehmermin =  0 if teilnehmerminka else int(teilnehmermin)
-        einwohner = int(re.sub('^[ ]*', '', evententries.find('b', text="Einwohner (1989):").next_sibling))
-        kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
-        demo = (evententries.find('b', text="Demo:").next_sibling == " x")
+        einwohner = int(parsefield(evententries, "Einwohner (1989)"))
         ttuple = datetime.datetime.strptime(datum, "%d.%m.%Y")
         date = ttuple.date()
         obj = {
@@ -72,6 +78,7 @@ for o in orte:
             "bezirk":  bezirk,
             "ort": ort,
             "datum": datum,
+            ## derived from datum
             "jahr":  ttuple.timetuple().tm_year,
             "monat":  ttuple.timetuple().tm_mon,
             "tag":  ttuple.timetuple().tm_mday,
@@ -84,11 +91,17 @@ for o in orte:
             "teilnehmermaxka": teilnehmermaxka,
             "teilnehmerminka": teilnehmerminka,
             "einwohner": einwohner,
-            "demo": demo,
-            "kirche": kirche,
-            "url": url
+            "teilnehmerrelort" :  0 if teilnehmermaxka else teilnehmermax/einwohner
+            "demo": (parsefield(evententries, "Demo") == " x"),
+            "kirche": (parsefield(evententries, "Kirche") == " x"),  ## boolean
+            "url": url,       
+            "beschreibung": parsefield(evententries, "Beschreibung"),
+            "ausgerufen": parsefield(evententries, "Ausgerufen"),
+            "thema": parsefield(evententries, "Thema"),
+            "besonderheiten": parsefield(evententries, "Besonderheiten"),
+            "bundesland": parsefield(evententries, "Bundesland")
         }
-        print (obj["id"],obj["uniq"],obj["teilnehmermax"])
+        print (obj["id"],obj["uniq"],obj["teilnehmermax"],obj["teilnehmerrelort"])
         events.append(obj)
         i = i + 1;
     scraperwiki.sqlite.save(unique_keys=["id"], data=events)
