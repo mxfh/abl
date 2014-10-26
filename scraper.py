@@ -20,8 +20,8 @@ for bezirkarea in soup.find_all("area"): # for each
     for ortli in soup.find_all("li"): 
         url = ortli.a['href']
         title = ortli.a.contents[0]
-        name = re.sub("\\(.*$", "", title)
-        count = re.search("\\((\d+) Eintrage|Einträge\\)$", title)
+        name = re.sub('\(.*$', '', title)
+        count = re.search("\((d+) Eintr\w+\)$", title)
         orte.append({"name": name, "url": url, "count": count}) # put the values extracted into a list
 
     
