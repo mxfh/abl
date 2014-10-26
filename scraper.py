@@ -18,7 +18,6 @@ scraperwiki.sqlite.execute("drop table if exists swdata")
 
 domain = "http://www.archiv-buergerbewegung.de/"
 url = domain + "index.php/demonstrationen"
-print (url)
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
 
@@ -34,16 +33,22 @@ for bezirkarea in soup.find_all("area"): # for each
     bezirke.append({"name": bezirk, "url": url})
 
 for b in bezirke:
-    html = scraperwiki.scrape(b["url"]) 
+    url = b["url"]
+    bezirk = b["name"]
+    print (url)
+    html = scraperwiki.scrape(url) 
     soup = BeautifulSoup(html).find(id="overlay-content")
     for ortli in soup.find_all("li"): 
-        url=  iriToUri(domain + ortli.a['href'])
+        url= iriToUri(domain + ortli.a['href'])
         title = ortli.a.contents[0]
         ort = re.sub(' \(.*$', '', title)
-        orte.append({"name": ort, "url": url}) # put the values extracted into a list
+        orte.append({"name": ort, "bezirk": bezirk, "url": url}) # put the values extracted into a list
 
 for o in orte:
-    html = scraperwiki.scrape(o['url']) 
+    ort = o["name"]
+    bezirk = o["bezirk"]
+    url = o['url']
+    html = scraperwiki.scrape(url) 
     soup = BeautifulSoup(html).find(id="overlay-content")
     for evententries in soup.find_all("div", class_="entry"): 
         datum = re.sub('^[ ]*', '', evententries.find('b', text="Datum:").next_sibling) ## remove leading spaces
@@ -60,9 +65,9 @@ for o in orte:
         date = ttuple.date()
         obj = {
             "id" : i,
-            "uniq" :  o["bezirk"] + o["ort"] + datum,
-            "bezirk":  o["bezirk"],
-            "ort": o["ort"],
+            "uniq" :  bezirk + ort + datum,
+            "bezirk":  bezirk,
+            "ort": ort,
             "datum": datum,
             "jahr":  ttuple.timetuple().tm_year,
             "monat":  ttuple.timetuple().tm_mon,
@@ -78,7 +83,7 @@ for o in orte:
             "einwohner": einwohner,
             "demo": demo,
             "kirche": kirche,
-            "url": o['url']
+            "url": url
         }
         print (obj["id"],obj["uniq"],obj["teilnehmer"])
         events.append(obj)
