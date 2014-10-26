@@ -17,9 +17,9 @@ for bezirkarea in soup.find_all("area"): # for each
     name = title.replace("Bezirk ", "")
     bezirke.append({"name": name, "url": url}) # put the values extracted into a list
     htmlo = scraperwiki.scrape(domain + url) 
-    soupo = BeautifulSoup(htmlo)
+    soupo = BeautifulSoup(htmlo).find(id="overlay-content")
     for ortli in soupo.find_all("li"): 
-        url= ortli.a.['href']
+        url= ortli.a['href']
         title = ortli.a.contents[0]
         name = re.sub('\(.*$', '', title)
         count = re.search("\((d+) Eintr\w+\)$", title)
