@@ -38,11 +38,11 @@ for bezirkarea in soup.find_all("area"): # for each
         html = scraperwiki.scrape(url) 
         soup = BeautifulSoup(html).find(id="overlay-content")
         for evententries in soup.find_all("div", class_="entry"): 
-            datum = re.sub('^[ ]*', '', evententries.find(b, text="Datum:").next_sibling) ## remove leading spaces
-            teilnehmermax =  re.sub('^[ ]*', '', evententries.find(b, text="Teilnehmer Max:").next_sibling)
-            einwohner = re.sub('^[ ]*', '', evententries.find(b, text="Einwohner (1989):").next_sibling)
-            kirche = evententries.find(b, text="Kirche:").next_sibling.replace(" x", "true")
-            demo = evententries.find(b, text="Demo:").next_sibling.replace(" x", "true")
+            datum = re.sub('^[ ]*', '', evententries.find('b', text="Datum:").next_sibling) ## remove leading spaces
+            teilnehmermax =  re.sub('^[ ]*', '', evententries.find('b', text="Teilnehmer Max:").next_sibling)
+            einwohner = re.sub('^[ ]*', '', evententries.find('b', text="Einwohner (1989):").next_sibling)
+            kirche = evententries.find('b', text="Kirche:").next_sibling.replace(" x", "true")
+            demo = evententries.find('b', text="Demo:").next_sibling.replace(" x", "true")
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo, url)
             events.append({
                 "bezirk": bezirk,
