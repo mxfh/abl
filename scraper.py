@@ -82,5 +82,5 @@ for o in orte:
             "demo": demo,
             "kirche": kirche
         })
-        i++;
+        i = i + 1;
         scraperwiki.sqlite.save(unique_keys=["id"], data=evententries)
