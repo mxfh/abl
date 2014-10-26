@@ -20,7 +20,8 @@ scraperwiki.sqlite.execute("drop table if exists swdata")
 if 'MORPH_DOMAIN' in os.environ and 'MORPH_START' in os.environ:
     domain = os.environ['MORPH_DOMAIN'] 
     startpath = os.environ['MORPH_STARTPATH']
-else print ("please define morph.io parameters")
+else:
+    print("please define morph.io parameters")
 url = domain + startpath
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
