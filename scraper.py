@@ -10,8 +10,8 @@ soup = BeautifulSoup(html) # load the html into beautifulsoup
 bezirke = [] # start with an empty list
 for bezirkarea in soup.find_all("area"): # for each 
     url = bezirkarea['href']
-    tile = bezirkarea['title']
+    title = bezirkarea['title']
     name = title.replace("Bezirk ", "")
-    bezirke.append(name:{"url": url}) # put the values extracted into a list
+    bezirke.append({"bezirk" : name:,"url": url}) # put the values extracted into a list
 
-scraperwiki.sqlite.save(unique_keys=["proper"], data=bezirke)
+scraperwiki.sqlite.save(unique_keys=["name"], data=bezirke)
