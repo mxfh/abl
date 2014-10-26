@@ -41,8 +41,8 @@ for bezirkarea in soup.find_all("area"): # for each
             datum = re.sub('^[ ]*', '', evententries.find('b', text="Datum:").next_sibling) ## remove leading spaces
             teilnehmermax =  re.sub('^[ ]*', '', evententries.find('b', text="Teilnehmer Max:").next_sibling)
             einwohner = re.sub('^[ ]*', '', evententries.find('b', text="Einwohner (1989):").next_sibling)
-            kirche = evententries.find('b', text="Kirche:").next_sibling.replace(" x", "true")
-            demo = evententries.find('b', text="Demo:").next_sibling.replace(" x", "true")
+            kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
+            demo = (evententries.find('b', text="Demo:").next_sibling == " x")
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo, url)
             events.append({
                 "bezirk": bezirk,
