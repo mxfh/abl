@@ -24,7 +24,7 @@ for bezirkarea in soup.find_all("area"): # for each
         title = ortli.a.contents[0]
         ort = re.sub(' \(.*$', '', title)
         orte.append({"name": ort, "url": url}) # put the values extracted into a list
-        print(url)
+        print(bezirk, ort, url)
         html = scraperwiki.scrape(url) 
         soup = BeautifulSoup(html).find(id="overlay-content")
         for evententries in soup.find_all("div", class_="entry"): 
