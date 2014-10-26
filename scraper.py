@@ -55,10 +55,10 @@ for o in orte:
         teilnehmermin =  0 if teilnehmerminka else int(teilnehmermin)
         einwohner = int(re.sub('^[ ]*', '', evententries.find('b', text="Einwohner (1989):").next_sibling))
         kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
-        demo = (evententries.find('b', text="Demo:").next_sibling == " x"),
+        demo = (evententries.find('b', text="Demo:").next_sibling == " x")
         ttuple = datetime.datetime.strptime(datum, "%d.%m.%Y")
         date = ttuple.date()
-    print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo)
+        print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo)
         events.append({
             "id" : bezirk + ort + datum,
             "bezirk": bezirk,
