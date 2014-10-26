@@ -11,19 +11,35 @@ soup = BeautifulSoup(html) # load the html into beautifulsoup
 
 bezirke = []
 orte = []
+events = []
 for bezirkarea in soup.find_all("area"): # for each 
     url = bezirkarea['href']
     title = bezirkarea['title']
-    name = title.replace("Bezirk ", "")
-    bezirke.append({"name": name, "url": url}) # put the values extracted into a list
-    htmlo = scraperwiki.scrape(domain + url) 
-    soupo = BeautifulSoup(htmlo).find(id="overlay-content")
-    for ortli in soupo.find_all("li"): 
+    bezirk = title.replace("Bezirk ", "")
+    bezirke.append({"name": bezirk, "url": url}) # put the values extracted into a list
+    html = scraperwiki.scrape(domain + url) 
+    soup = BeautifulSoup(html).find(id="overlay-content")
+    for ortli in soup.find_all("li"): 
         url= ortli.a['href']
         title = ortli.a.contents[0]
-        name = re.sub('\(.*$', '', title)
-        count = re.search("\((d+) Eintr\w+\)$", title)
-        orte.append({"name": name, "url": url, "count": count}) # put the values extracted into a list
+        ort = re.sub(' \(.*$', '', title)
+        orte.append({"name": ort, "url": url}) # put the values extracted into a list
+        html = scraperwiki.scrape(domain + url) 
+        soup = BeautifulSoup(html).find(id="overlay-content")
+        for evententries in soupo.find_all(class="entry"): 
+            datum = re.sub('^[ ]*', '', evententries.find(b, text="Datum:").next_sibling) ## remove leading spaces
+            teilnehmermax =  re.sub('^[ ]*', '', evententries.find(b, text="Teilnehmer Max:").next_sibling)
+            einwohner = re.sub('^[ ]*', '', evententries.find(b, text="Einwohner (1989):").next_sibling)
+            kirche = evententries.find(b, text="Kirche:").next_sibling.replace(" x", "true")
+            demo = evententries.find(b, text="Demo:").next_sibling.replace(" x", "true")
+            events.append({
+                "bezirk": bezirk,
+                "ort": ort,
+                "datum": datum,
+                "teilnehmermax" : teilnehmermax,
+                "einwohner" : einwohner,
+                "demo" : demo,
+                "kirche" : kirche
+                })
 
-    
-scraperwiki.sqlite.save(unique_keys=["name"], data=orte)
+    scraperwiki.sqlite.save(unique_keys=["ort, datum"], data=orte)
