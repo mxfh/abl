@@ -21,7 +21,7 @@ scraperwiki.sqlite.execute("drop table if exists swdata")
 ##    domain = os.environ['MORPH_DOMAIN']
 domain = "http://www.archiv-buergerbewegung.de/"
 url = domain + "index.php/demonstrationen"
-print (domain, url)
+print (url)
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
 
