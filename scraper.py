@@ -1,6 +1,7 @@
 import scraperwiki
 import re
 import urlparse
+import date
 import datetime
 import time
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
