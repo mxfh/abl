@@ -24,7 +24,7 @@ soup = BeautifulSoup(html) # load the html into beautifulsoup
 bezirke = []
 orte = []
 events = []
-tageins = datetime.datetime(1989, 8, 1)  ## beginn der ersten woche erste monat 1.8.89 relativ zu 13.8.89
+tageins = datetime.datetime(1989, 8, 7)  ## beginn der ersten woche erste monat 7.8.89 relativ zu 13.8.89
 for bezirkarea in soup.find_all("area"): # for each 
     url = iriToUri(domain + bezirkarea['href'])
     title = bezirkarea['title']
@@ -64,8 +64,6 @@ for bezirkarea in soup.find_all("area"): # for each
                 "tag":  ttuple.timetuple().tm_mday,
                 "yday": ttuple.timetuple().tm_yday,
                 "tageseit": (ttuple - tageins).days,
-                "wochenseit": (ttuple - tageins).weeks,
-                "monateseit": (ttuple - tageins).months,
                 "isoweekday": date.isoweekday(),
                 "isoweek": date.isocalendar()[1],
                 "teilnehmermax": teilnehmermax,
