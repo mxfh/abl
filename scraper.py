@@ -93,7 +93,7 @@ for o in orte:
             "teilnehmermaxka": teilnehmermaxka,
             "teilnehmerminka": teilnehmerminka,
             "einwohner": einwohner,
-            "teilnehmerrelort":  0 if (teilnehmermax == 0 or einwohner == 0) else teilnehmermax/einwohner,
+            "teilnehmerrelort":  0 if (teilnehmermax == 0 or einwohner == 0) else (float)teilnehmermax/einwohner * 100,
             "demo": (parsefield(ee, "Demo") == " x"),
             "kirche": (parsefield(ee, "Kirche") == " x"),  ## boolean
             "url": url,       
