@@ -34,7 +34,7 @@ print(bezirke)
 
 for b in bezirke:
     print(b)
-    html = scraperwiki.scrape(b.url) 
+    html = scraperwiki.scrape(b['url']) 
     soup = BeautifulSoup(html).find(id="overlay-content")
     for ortli in soup.find_all("li"): 
         url=  iriToUri(domain + ortli.a['href'])
@@ -44,7 +44,7 @@ for b in bezirke:
 
 print(orte) 
 for o in orte:
-    html = scraperwiki.scrape(o.url) 
+    html = scraperwiki.scrape(o['url']) 
     soup = BeautifulSoup(html).find(id="overlay-content")
     for evententries in soup.find_all("div", class_="entry"): 
         datum = re.sub('^[ ]*', '', evententries.find('b', text="Datum:").next_sibling) ## remove leading spaces
