@@ -14,4 +14,4 @@ for bezirkarea in soup.find_all("area"): # for each
     name = title.replace("Bezirk ", "")
     bezirke.append({"bezirk": name, "url": url}) # put the values extracted into a list
 
-scraperwiki.sqlite.save(unique_keys=["name"], data=bezirke)
+scraperwiki.sqlite.save(unique_keys=["bezirk"], data=bezirke)
