@@ -23,7 +23,7 @@ for bezirkarea in soup.find_all("area"): # for each
         title = ortli.a.contents[0]
         name = re.sub('\(.*$', '', title)
         count = re.search("\((d+) Eintr\w+\)$", title)
-        orte.append({"name": name, "url": urlb, "count": count}) # put the values extracted into a list
+        orte.append({"name": name, "url": url, "count": count}) # put the values extracted into a list
 
     
 scraperwiki.sqlite.save(unique_keys=["name"], data=orte)
