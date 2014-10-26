@@ -1,7 +1,7 @@
 import scraperwiki
 import re
 import urlparse
-from datetime import datetime
+import datetime
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
 
 def urlEncodeNonAscii(b):
@@ -50,7 +50,7 @@ for bezirkarea in soup.find_all("area"): # for each
             einwohner = int(re.sub('^[ ]*', '', evententries.find('b', text="Einwohner (1989):").next_sibling))
             kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
             demo = (evententries.find('b', text="Demo:").next_sibling == " x"),
-            ts = datetime.strptime(datum, "%d.%m.%Y"),
+            ts = datetime.datetime.strptime(datum, "%d.%m.%Y"),
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo, url)
             events.append({
                 "key" : datum + ort,
