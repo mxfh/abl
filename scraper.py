@@ -85,7 +85,7 @@ for o in orte:
             "kirche": kirche,
             "url": url
         }
-        print (obj["id"],obj["uniq"],obj["teilnehmer"])
+        print (obj["id"],obj["uniq"],obj["teilnehmermax"])
         events.append(obj)
         i = i + 1;
     scraperwiki.sqlite.save(unique_keys=["id"], data=events)
