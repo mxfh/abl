@@ -50,7 +50,7 @@ for b in bezirke:
         orte.append({"name": ort, "bezirk": bezirk, "url": url}) # put the values extracted into a list
 
 def parsefield(string, html):
-    suffix = ':'
+    suffix = u':'
     searchstring = string + suffix
     prefixrepattern = '^[ ]*'  ## select leading spaces
     fieldtitlecontainerelement = 'b'
