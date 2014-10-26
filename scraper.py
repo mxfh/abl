@@ -41,7 +41,6 @@ for b in bezirke:
         ort = re.sub(' \(.*$', '', title)
         orte.append({"name": ort, "url": url}) # put the values extracted into a list
 
-print(orte) 
 for o in orte:
     html = scraperwiki.scrape(o['url']) 
     soup = BeautifulSoup(html).find(id="overlay-content")
@@ -60,9 +59,9 @@ for o in orte:
         date = ttuple.date()
         obj = {
             "id" : i,
-            "uniq" : bezirk + ort + datum,
-            "bezirk": bezirk,
-            "ort": ort,
+            "uniq" :  o["bezirk"] + o["ort"] + datum,
+            "bezirk":  o["bezirk"],
+            "ort": o["ort"],
             "datum": datum,
             "jahr":  ttuple.timetuple().tm_year,
             "monat":  ttuple.timetuple().tm_mon,
@@ -80,7 +79,7 @@ for o in orte:
             "kirche": kirche,
             "url": o['url']
         }
-        print obj
+        print (obj["id"],obj["uniq"],obj["teilnehmer"])
         events.append(obj)
         i = i + 1;
-        scraperwiki.sqlite.save(unique_keys=["id"], data=events)
+    scraperwiki.sqlite.save(unique_keys=["id"], data=events)
