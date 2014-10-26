@@ -61,18 +61,18 @@ for bezirkarea in soup.find_all("area"): # for each
                 "jahr":  ts.tm_year,
                 "monat":  ts.tm_month,
                 "tag":  ts.tm_day,
-                "tageseit" : (ts - tageins).days,
-                "wochenseit" : (ts - tageins).weeks,
-                "yday" ts.tm_yday,
-                "isoweekday" : ts.isoweekday(),
-                "isoweek" : ts.isocalendar()[1],
-                "teilnehmermax" : teilnehmermax,
-                "teilnehmermin" : teilnehmermin,
-                "teilnehmermaxka" : teilnehmermaxka,
-                "teilnehmerminka" : teilnehmerminka,
-                "einwohner" : einwohner,
-                "demo" : demo,
-                "kirche" : kirche
+                "tageseit": (ts - tageins).days,
+                "wochenseit": (ts - tageins).weeks,
+                "yday": ts.tm_yday,
+                "isoweekday": ts.isoweekday(),
+                "isoweek": ts.isocalendar()[1],
+                "teilnehmermax": teilnehmermax,
+                "teilnehmermin": teilnehmermin,
+                "teilnehmermaxka": teilnehmermaxka,
+                "teilnehmerminka": teilnehmerminka,
+                "einwohner": einwohner,
+                "demo": demo,
+                "kirche": kirche
                 })
 
     scraperwiki.sqlite.save(unique_keys=["key"], data=evententries)
