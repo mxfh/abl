@@ -33,6 +33,7 @@ for bezirkarea in soup.find_all("area"): # for each
 print(bezirke) 
 
 for b in bezirke:
+    print(b)
     html = scraperwiki.scrape(b.url) 
     soup = BeautifulSoup(html).find(id="overlay-content")
     for ortli in soup.find_all("li"): 
