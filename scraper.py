@@ -59,7 +59,7 @@ for bezirkarea in soup.find_all("area"): # for each
                 "bezirk": bezirk,
                 "ort": ort,
                 "datum": datum,
-                "jahr":  date.year,
+                "jahr":  date.tm_year,
                 "monat":  date.month,
                 "tag":  date.day,
                 "tageseit": (date - tageins).days,
