@@ -34,7 +34,7 @@ for bezirkarea in soup.find_all("area"): # for each
     bezirke.append({"name": bezirk, "url": url})
 
 for b in bezirke:
-    html = scraperwiki.scrape(b['url']) 
+    html = scraperwiki.scrape(b["url"]) 
     soup = BeautifulSoup(html).find(id="overlay-content")
     for ortli in soup.find_all("li"): 
         url=  iriToUri(domain + ortli.a['href'])
