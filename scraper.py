@@ -54,7 +54,7 @@ for bezirkarea in soup.find_all("area"): # for each
             date = ttuple.date()
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo)
             events.append({
-                "id" : bezirk + ort + (ttuple - tageins).days,
+                "id" : bezirk + ort + datum,
                 "bezirk": bezirk,
                 "ort": ort,
                 "datum": datum,
