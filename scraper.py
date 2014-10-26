@@ -50,7 +50,7 @@ for bezirkarea in soup.find_all("area"): # for each
                 "bezirk": bezirk,
                 "ort": ort,
                 "datum": datum,
-                "ts" : time.strftime(datum, "%d.%m.%Y"),
+                "ts" : time.strptime(datum, "%d.%m.%Y"),
                 "teilnehmermax" : int(teilnehmermax),
                 "einwohner" : int(einwohner),
                 "demo" : demo,
