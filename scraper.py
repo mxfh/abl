@@ -1,8 +1,8 @@
 import scraperwiki
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
 
-scraperwiki.sqlite.execute("drop table if exists data")
-scraperwiki.sqlite.execute("create table data")
+scraperwiki.sqlite.execute("drop table if exists swdata")
+scraperwiki.sqlite.execute("create table swdata")
 url = "http://www.archiv-buergerbewegung.de/index.php/demonstrationen" # loading your url from the csv/database
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
