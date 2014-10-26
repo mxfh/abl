@@ -26,7 +26,7 @@ for bezirkarea in soup.find_all("area"): # for each
         orte.append({"name": ort, "url": url}) # put the values extracted into a list
         html = scraperwiki.scrape(domain + url) 
         soup = BeautifulSoup(html).find(id="overlay-content")
-        for evententries in soupo.find_all(class="entry"): 
+        for evententries in soupo.find_all("div", class_="entry"): 
             datum = re.sub('^[ ]*', '', evententries.find(b, text="Datum:").next_sibling) ## remove leading spaces
             teilnehmermax =  re.sub('^[ ]*', '', evententries.find(b, text="Teilnehmer Max:").next_sibling)
             einwohner = re.sub('^[ ]*', '', evententries.find(b, text="Einwohner (1989):").next_sibling)
