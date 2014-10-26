@@ -1,6 +1,7 @@
 import scraperwiki
 import re
 import urlparse
+import datetime
 import time
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
 
@@ -24,6 +25,7 @@ soup = BeautifulSoup(html) # load the html into beautifulsoup
 bezirke = []
 orte = []
 events = []
+tageins = date(1989, 8, 7)  ## beginn der ersten woche 7.8.89 relativ zu 13.8.89
 for bezirkarea in soup.find_all("area"): # for each 
     url = iriToUri(domain + bezirkarea['href'])
     title = bezirkarea['title']
@@ -48,16 +50,26 @@ for bezirkarea in soup.find_all("area"): # for each
             teilnehmermin =  0 if teilnehmerminka else int(teilnehmermin)
             einwohner = int(re.sub('^[ ]*', '', evententries.find('b', text="Einwohner (1989):").next_sibling))
             kirche = (evententries.find('b', text="Kirche:").next_sibling == " x")  ## boolean
-            demo = (evententries.find('b', text="Demo:").next_sibling == " x")
+            demo = (evententries.find('b', text="Demo:").next_sibling == " x"),
+            ts = time.strptime(datum, "%d.%m.%Y"),
             print(bezirk, ort, datum, teilnehmermax, einwohner, kirche, demo, url)
             events.append({
                 "key" : datum + ort,
                 "bezirk": bezirk,
                 "ort": ort,
                 "datum": datum,
-                "ts" : time.strptime(datum, "%d.%m.%Y"),
+                "jahr":  ts.tm_year,
+                "monat":  ts.tm_month,
+                "tag":  ts.tm_day,
+                "tageseit" : (ts - tageins).days,
+                "wochenseit" : (ts - tageins).weeks,
+                "yday" tm_yday,
+                "isoweekday" : ts.isoweekday(),
+                "isoweek" : ts.isocalendar()[1],
                 "teilnehmermax" : teilnehmermax,
                 "teilnehmermin" : teilnehmermin,
+                "teilnehmermaxka" : teilnehmermaxka,
+                "teilnehmerminka" : teilnehmerminka,
                 "einwohner" : einwohner,
                 "demo" : demo,
                 "kirche" : kirche
