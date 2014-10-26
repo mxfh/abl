@@ -1,7 +1,7 @@
 import scraperwiki
 import re
 import urlparse
-import datetime
+from datetime import datetime
 from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in HTML
 
 def urlEncodeNonAscii(b):
