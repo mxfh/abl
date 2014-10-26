@@ -20,6 +20,7 @@ scraperwiki.sqlite.execute("drop table if exists swdata")
 if 'MORPH_DOMAIN' in os.environ:
     domain = os.environ['MORPH_DOMAIN']
 url = domain + "index.php/demonstrationen"
+print (domain, url)
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
 
