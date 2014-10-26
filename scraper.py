@@ -10,7 +10,7 @@ soup = BeautifulSoup(html) # load the html into beautifulsoup
 bezirke = [] # start with an empty list
 for bezirkarea in soup.find_all("area"): # for each 
     url = bezirkarea['href']
-    bezirk = bezirkarea['title']
-    bezirke.append({"url": url, "bezirk": bezirk}) # put the values extracted into a list
+    name = bezirkarea['title']
+    bezirke.append({"url": url, "name": name}) # put the values extracted into a list
 
 scraperwiki.sqlite.save(unique_keys=["url"], data=bezirke)
