@@ -93,7 +93,7 @@ for o in orte:
             "teilnehmermaxka": teilnehmermaxka,
             "teilnehmerminka": teilnehmerminka,
             "einwohner": einwohner,
-            "teilnehmerrelort" :  0 if teilnehmermaxka else teilnehmermax/einwohner
+            "teilnehmerrelort":  0 if teilnehmermaxka else teilnehmermax/einwohner,
             "demo": (parsefield(evententries, "Demo") == " x"),
             "kirche": (parsefield(evententries, "Kirche") == " x"),  ## boolean
             "url": url,       
