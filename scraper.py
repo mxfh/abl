@@ -63,7 +63,7 @@ for bezirkarea in soup.find_all("area"): # for each
                 "tag":  ts.tm_day,
                 "tageseit" : (ts - tageins).days,
                 "wochenseit" : (ts - tageins).weeks,
-                "yday" tm_yday,
+                "yday" ts.tm_yday,
                 "isoweekday" : ts.isoweekday(),
                 "isoweek" : ts.isocalendar()[1],
                 "teilnehmermax" : teilnehmermax,
