@@ -98,7 +98,7 @@ for o in orte:
             "kirche": (parsefield(ee, "Kirche") == " x"),  ## boolean
             "url": url,       
             "beschreibung": parsefield(ee, "Beschreibung"),
-            "ausgerufen": parsefield(ee, "Ausgerufen"),
+            "aufgerufen": parsefield(ee, "Aufgerufen"),
             "thema": parsefield(ee, "Thema"),
             "besonderheiten": parsefield(ee, "Besonderheiten"),
             "bundesland": parsefield(ee, "Bundesland")
