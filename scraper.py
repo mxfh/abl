@@ -72,6 +72,8 @@ for o in orte:
         teilnehmerminka = (teilnehmermin == "keine Angaben")
         teilnehmermin =  0 if teilnehmerminka else int(teilnehmermin)
         einwohner = int(parsefield(ee, "Einwohner (1989)"))
+        ## get relative number of participants as 2 digit precision float
+        teilnehmerort = 0 if (teilnehmermax == 0 or einwohner == 0) else float("%0.2f" % ((float(teilnehmermax)/einwohner) * 100))
         ttuple = datetime.datetime.strptime(datum, "%d.%m.%Y")
         date = ttuple.date()
         obj = {
@@ -93,7 +95,7 @@ for o in orte:
             "teilnehmermaxka": teilnehmermaxka,
             "teilnehmerminka": teilnehmerminka,
             "einwohner": einwohner,
-            "teilnehmerrelort":  0 if (teilnehmermax == 0 or einwohner == 0) else (float)teilnehmermax/einwohner * 100,
+            "teilnehmerrelort":  teilnehmerort,
             "demo": (parsefield(ee, "Demo") == " x"),
             "kirche": (parsefield(ee, "Kirche") == " x"),  ## boolean
             "url": url,       
