@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup # BeautifulSoup helps you to find what you want in
 
 scraperwiki.sqlite.execute("drop table if exists swdata")
 
+domain = "http://www.archiv-buergerbewegung.de"
 url = "http://www.archiv-buergerbewegung.de/index.php/demonstrationen" # loading your url from the csv/database
 html = scraperwiki.scrape(url) # download the html content of the page
 soup = BeautifulSoup(html) # load the html into beautifulsoup
@@ -15,7 +16,7 @@ for bezirkarea in soup.find_all("area"): # for each
     title = bezirkarea['title']
     name = title.replace("Bezirk ", "")
     bezirke.append({"name": name, "url": url}) # put the values extracted into a list
-    html = scraperwiki.scrape(url) 
+    html = scraperwiki.scrape(domain + url) 
     soup = BeautifulSoup(html)
     for ortli in soup.find_all("li"): 
         url = ortli.a['href']
