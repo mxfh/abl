@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import scraperwiki
 import re
 import urlparse
@@ -50,9 +51,9 @@ for b in bezirke:
         title = ortli.a.contents[0]
         ort = re.sub(' \(.*$', '', title)
         ## temporary on the fly corrections of known errors
-        if (ort == u"Münchenberndsdorf"):
-            ort = u"Münchenberndsdorf"
-            print(u"Korrektur Münchenberndsdorf > Münchenbernsdorf")
+        if (ort == "Münchenberndsdorf"):
+            ort = "Münchenberndsdorf"
+            print("Korrektur Münchenberndsdorf > Münchenbernsdorf")
             correctionsflag = True
         if (ort == "Gera" AND tmpbezirk == "Erfurt"):
             tmpbezirk = "Gera"
