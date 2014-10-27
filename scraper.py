@@ -73,15 +73,15 @@ for o in orte:
         teilnehmermin =  0 if teilnehmerminka else int(teilnehmermin)
         einwohner = int(parsefield(ee, "Einwohner (1989)"))
         ## get relative number of participants as 2 digit precision float
-        teilnehmerort = 0 if (teilnehmermax == 0 or einwohner == 0) else float("%0.2f" % ((float(teilnehmermax)/einwohner) * 100))
+        ## teilnehmerort = 0 if (teilnehmermax == 0 or einwohner == 0) else float("%0.2f" % ((float(teilnehmermax)/einwohner) * 100))
         ttuple = datetime.datetime.strptime(datum, "%d.%m.%Y")
         date = ttuple.date()
         obj = {
             "id" : i,
-            "uniq" :  bezirk + ort + datum,
             "bezirk":  bezirk,
             "ort": ort,
             "datum": datum,
+
             ## derived from datum
             "jahr":  ttuple.timetuple().tm_year,
             "monat":  ttuple.timetuple().tm_mon,
@@ -90,14 +90,18 @@ for o in orte:
             "tageseit": (ttuple - tageins).days,
             "isoweekday": date.isoweekday(),
             "isoweek": date.isocalendar()[1],
+            
             "teilnehmermax": teilnehmermax,
             "teilnehmermin": teilnehmermin,
             "teilnehmermaxka": teilnehmermaxka,
             "teilnehmerminka": teilnehmerminka,
             "einwohner": einwohner,
-            "teilnehmerrelort":  teilnehmerort,
-            "demo": (parsefield(ee, "Demo") == " x"),
-            "kirche": (parsefield(ee, "Kirche") == " x"),  ## boolean
+
+             ## daten nicht ausreichend
+             ## "teilnehmerrelort":  teilnehmerort,
+
+            "demo": (parsefield(ee, "Demo") == "x"), ## boolean
+            "kirche": (parsefield(ee, "Kirche") == "x"),  ## boolean
             "url": url,       
             "beschreibung": parsefield(ee, "Beschreibung"),
             "aufgerufen": parsefield(ee, "Aufgerufen"),
@@ -110,6 +114,8 @@ for o in orte:
             obj["bezirk"],
             obj["ort"].encode('utf-8') + " (" + str(obj["einwohner"]) + ")",
             obj["datum"],
+            obj["kirche"],
+            obj["demo"],
             obj["teilnehmermax"],
             obj["teilnehmerrelort"]
         ]
