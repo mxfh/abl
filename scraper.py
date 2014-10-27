@@ -15,6 +15,7 @@ def iriToUri(iri):
         for parti, part in enumerate(parts)
     )
 
+correctionsflag = False
 scraperwiki.sqlite.execute("drop table if exists swdata")
 
 if 'MORPH_DOMAIN' in os.environ and 'MORPH_STARTPATH' in os.environ:
@@ -49,8 +50,14 @@ for b in bezirke:
         title = ortli.a.contents[0]
         ort = re.sub(' \(.*$', '', title)
         ## temporary on the fly corrections of known errors
-        if (ort == "Münchenberndsdorf"): ort = "Münchenberndsdorf"
-        if (ort == "Gera" AND tmpbezirk == "Erfurt"): tmpbezirk = "Gera"
+        if (ort == "Münchenberndsdorf"):
+            ort = "Münchenberndsdorf"
+            print("Korrektur Münchenberndsdorf > Münchenbernsdorf")
+            correctionsflag = True
+        if (ort == "Gera" AND tmpbezirk == "Erfurt"):
+            tmpbezirk = "Gera"
+            print("Korrektur Gera, Bezirk Erfurt > Bezirk Gera")
+            correctionsflag = True
         ## end corrections
         orte.append({"name": ort, "bezirk": tmpbezirk, "url": url}) # put the values extracted into a list
 
@@ -126,4 +133,9 @@ for o in orte:
         print('\t'.join(map(str,olist))) ## debug log tab seperated
         events.append(obj)
         i = i + 1;
-    scraperwiki.sqlite.save(unique_keys=["id"], data=events)
+
+scraperwiki.sqlite.save(unique_keys=["id"], data=events)
+if correctionsflag:
+   print("finished with corrections") 
+else:
+   print("finished without corrections")  
