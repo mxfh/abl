@@ -53,7 +53,8 @@ for b in bezirke:
         ## temporary on the fly corrections of known errors
         if (ort == u"Münchenberndsdorf"):
             ort = u"Münchenberndsdorf"
-            print("Korrektur Münchenberndsdorf > Münchenbernsdorf".encode('utf-8'))
+            printstr = u"Korrektur Münchenberndsdorf > Münchenbernsdorf"
+            print(printstr.encode('utf-8'))
             correctionsflag = True
         if ((ort == "Gera") and (tmpbezirk == "Erfurt")):
             tmpbezirk = "Gera"
