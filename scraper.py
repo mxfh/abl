@@ -116,8 +116,7 @@ for o in orte:
             obj["datum"],
             obj["kirche"],
             obj["demo"],
-            obj["teilnehmermax"],
-            obj["teilnehmerrelort"]
+            obj["teilnehmermax"]
         ]
         print('\t'.join(map(str,olist))) ## debug log tab seperated
         events.append(obj)
