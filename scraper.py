@@ -51,8 +51,8 @@ for b in bezirke:
         title = ortli.a.contents[0]
         ort = re.sub(' \(.*$', '', title)
         ## temporary on the fly corrections of known errors
-        if (ort == "Münchenberndsdorf"):
-            ort = "Münchenberndsdorf"
+        if (ort == u"Münchenberndsdorf"):
+            ort = u"Münchenberndsdorf"
             print("Korrektur Münchenberndsdorf > Münchenbernsdorf".encode('utf-8'))
             correctionsflag = True
         if ((ort == "Gera") and (tmpbezirk == "Erfurt")):
