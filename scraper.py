@@ -55,7 +55,7 @@ for b in bezirke:
             ort = "Münchenberndsdorf"
             print("Korrektur Münchenberndsdorf > Münchenbernsdorf")
             correctionsflag = True
-        if (ort == "Gera" AND tmpbezirk == "Erfurt"):
+        if ((ort == "Gera") and (tmpbezirk == "Erfurt")):
             tmpbezirk = "Gera"
             print("Korrektur Gera, Bezirk Erfurt > Bezirk Gera")
             correctionsflag = True
