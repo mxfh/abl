@@ -43,11 +43,16 @@ for b in bezirke:
     print (url)
     html = scraperwiki.scrape(url) 
     soup = BeautifulSoup(html).find(id="overlay-content")
-    for ortli in soup.find_all("li"): 
+    for ortli in soup.find_all("li"):
+        tmpbezirk = bezirk
         url= iriToUri(domain + ortli.a['href'])
         title = ortli.a.contents[0]
         ort = re.sub(' \(.*$', '', title)
-        orte.append({"name": ort, "bezirk": bezirk, "url": url}) # put the values extracted into a list
+        ## temporary on the fly corrections of known errors
+        if (ort == "Münchenberndsdorf"): ort = "Münchenberndsdorf"
+        if (ort == "Gera" AND tmpbezirk == "Erfurt"): tmpbezirk = "Gera"
+        ## end corrections
+        orte.append({"name": ort, "bezirk": tmpbezirk, "url": url}) # put the values extracted into a list
 
 def parsefield(html, string):
     suffix = ":"
